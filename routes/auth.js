@@ -12,8 +12,9 @@ authRoutes.get("/signup", (req, res, next) => {
 authRoutes.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
 
-  if (username === "" || password === "") {
+  if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
@@ -29,7 +30,9 @@ authRoutes.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      email
+
     });
 
     newUser.save((err) => {
@@ -48,8 +51,8 @@ authRoutes.get("/login", (req, res, next) => {
 });
 
 authRoutes.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login"
+  successRedirect: "/private",
+  failureRedirect: "/"
 }));
 
 authRoutes.get("/logout", (req, res) => {
