@@ -1,3 +1,3 @@
 module.exports = {
-    dbURL: 'mongodb://localhost/passport-auth-0118'
+    dbURL: 'mongodb://localhost/Offensity_dev'
 }

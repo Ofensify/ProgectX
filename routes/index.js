@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/private', isLoggedIn, function(req, res, next) {
-  res.render('private');
+router.get('/profile', function(req, res, next) {
+  res.render('profile');
 });
 
 

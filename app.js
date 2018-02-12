@@ -9,6 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const debug = require('debug')(`m2-0118-passport-auth:${path.basename(__filename).split('.')[0]}`)
 const passportConfig = require('./passport')
+const expressLayouts = require('express-ejs-layouts');
 const {dbURL} = require('./config');
 
 mongoose.connect(dbURL)
@@ -45,12 +46,14 @@ passportConfig(app);
 
 app.use((req,res,next) => {
   res.locals.user = req.user;
-  res.locals.title = 'Passport Auth 0118';
+  res.locals.title = 'Offensity';
   next();
 }) 
 
 app.use('/', index);
 app.use('/auth', auth);
+app.set('layout', 'layouts/main-layout');
+app.use(expressLayouts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
