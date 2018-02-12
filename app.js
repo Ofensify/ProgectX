@@ -45,7 +45,7 @@ passportConfig(app);
 
 app.use((req,res,next) => {
   res.locals.user = req.user;
-  res.locals.title = 'Passport Auth 0118';
+  res.locals.title = 'Offensify';
   next();
 }) 
 
