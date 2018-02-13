@@ -6,7 +6,7 @@ const User = require('../models/User')
 const Relation = require('../models/Relation');
 const Offense = require('../models/Offense')
 
-router.get('/profile', (req, res, next) => {
+router.get('/profile/:id', onlyMe , (req, res, next) => {
     let user = req.user._id;
     Relation.find({ 'destination_Id': req.user._id })
         .populate("offense_Id")

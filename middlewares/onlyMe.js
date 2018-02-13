@@ -4,7 +4,7 @@ const onlyMe = (req,res,next) => {
         next();
     }else{
         console.log("[Forbidden] User cannot access this page");
-        res.redirect('/');
+        res.redirect('/home');
     }
 }
 
