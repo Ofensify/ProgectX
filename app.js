@@ -57,6 +57,7 @@ app.use('/', index);
 app.use('/', profile);
 app.use('/', auth);
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
