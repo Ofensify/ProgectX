@@ -18,24 +18,18 @@ authRoutes.post("/signup", (req, res, next) => {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
-
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", { message: "The username already exists" });
       return;
     }
-
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
-
     const newUser = new User({
       username,
       password: hashPass,
       email
-
     });
-
-
     newUser.save((err) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
@@ -46,9 +40,8 @@ authRoutes.post("/signup", (req, res, next) => {
   });
 });
 
-
 authRoutes.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  res.render("login");
 });
 
 authRoutes.post("/login", passport.authenticate("local", {

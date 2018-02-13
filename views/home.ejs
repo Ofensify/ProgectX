@@ -1,3 +1,30 @@
 <h1>logo</h1>
+<a href="/createnew">
+    <h2>crea tu ofensa </h2>
+</a>
+<a href="/profile/<%= user %>">
+    <h2>tu perfil </h2>
+</a>
+<h2>ofensas en orden de novedad</h2>
 
-<h2>crea tu ofensa <a href="/createnew"</h2>
+    <% off.forEach((o) => {  %>
+        <ul>
+        <li>
+            <%= o.destination_Id.username %>
+        </li>
+        <li>
+            <%= o.offense_Id.img %>
+        </li>
+        <li>
+            <%= o.offense_Id.created_at %>
+        </li>
+    </ul>
+        <% }) %>
+
+<h2> futuro top de gente que crea ofensas</h2>
+
+<h2> ofensas mas puntuada</h2>
+
+<a href="/logout" ´>
+    <h2>Logout</h2>
+</a>

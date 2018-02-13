@@ -6,13 +6,13 @@ const User = require('../models/User')
 const Relation = require('../models/Relation');
 const Offense = require('../models/Offense')
 
-router.get('/profile', (req, res, next) => {
-    let user = req.user._id;
-    Relation.find({ 'destination_Id': req.user._id })
+router.get('/profile/:id', onlyMe, (req, res, next) => {
+    let user = req.params.id;
+    Relation.find({ 'destination_Id': req.params.id })
         .populate("offense_Id")
         .then(relationd => {
             //   console.log(relationd);
-            Relation.find({ 'creator_Id': req.user._id })
+            Relation.find({ 'creator_Id': req.params.id })
                 .populate("offense_Id")
                 .then(relationc => {
                     // console.log(relationc);
@@ -24,7 +24,7 @@ router.get('/profile', (req, res, next) => {
         });
 })
 
-router.get("/delete/:id", (req, res, next) => {
+router.get("/delete/:id", isLoggedIn, (req, res, next) => {
     let off = req.params.id;
     Relation.findById(off)
         .populate("offense_Id")
@@ -42,9 +42,5 @@ router.get("/delete/:id", (req, res, next) => {
             next(e);
         })
 })
-
-router.get('/onlyme', onlyMe, function (req, res, next) {
-    res.render('private');
-});
 
 module.exports = router;
