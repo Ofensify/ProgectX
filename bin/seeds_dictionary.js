@@ -7,7 +7,8 @@ mongoose
   .catch(e => console.log(e));
 
   const dictionary = {
-    combination:"00000"
+    combination:"00000",
+    phrase:"holi"
   };
 
 
