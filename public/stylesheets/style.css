@@ -38,3 +38,19 @@ h4,
 .modal-footer {
   background-color: #f9f9f9;
 }
+.container-landing{
+  text-align: center;
+}
+#username_sign{
+  width: 350px;
+  margin-left: 500px;
+  }
+  #password_sign{
+    width: 350px;
+    margin-left: 500px;
+  }
+  #email_sign{
+    width: 350px;
+    margin-left: 500px;
+
+  }

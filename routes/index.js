@@ -4,16 +4,19 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 const onlyMe = require('../middlewares/onlyMe');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/profile', (req, res, next) => {
   res.render('profile');
 });
 
+router.get('/private', (req,res,next) => {
+  res.render('private');
+})
 
-router.get('/onlyme', onlyMe, function(req, res, next) {
+router.get('/onlyme', onlyMe, (req, res, next) => {
   res.render('private');
 });
 

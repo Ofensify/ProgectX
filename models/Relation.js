@@ -8,6 +8,6 @@ const relationSchema = new Schema(
     creator_Id: { type: Schema.Types.ObjectId, ref: 'User', required: true}
   })
 
-const Relation = mongoose.model("Relation", userSchema);
+const Relation = mongoose.model("Relation", relationSchema);
 
 module.exports = Relation;
