@@ -8,10 +8,21 @@
     </div>
 </div>
 <a href="/">Go home</a>
-<div>
-    <p>mirar en la BBDD como nos traemos los creados por nosotros</p>
+<h2>User_Id:
+    <%= user %>
+</h2>
+<div class="row">
+    <h3>creados por mi</h3>
+    <div>
+        <% if (relationc.length>0) { %>
+            <%= relationc %>
+            <a href="delete/<%=relationc[0]._id%>" type="button" class="btn btn-danger">Delete</a>
+        <%}%>
+    </div>
 </div>
-<div>
-    <p>mirar en la bbdd como nos traemos los que somos el destinatario</p>
+<div class="row">
+    <h3>destinatario yo</h3>
+    <div>
+        <%= relationd %>
+    </div>
 </div>
-
