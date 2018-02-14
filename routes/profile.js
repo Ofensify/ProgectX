@@ -8,7 +8,7 @@ const Offense = require('../models/Offense')
 
 router.get('/profile/:id', onlyMe, (req, res, next) => {
     let user = req.params.id;
-    let name= req.user.username;
+    let name = req.user.username;
     // console.log(user);
     // console.log(name);
     Relation.find({ 'destination_Id': req.params.id })
