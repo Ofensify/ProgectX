@@ -3,7 +3,9 @@ const Schema   = mongoose.Schema;
 
 const dictionarySchema = new Schema({
       combination: String,
-      phrase: String
+      text0:String,
+      text1:String
+
 });
   
   const Dictionary = mongoose.model("Dictionary", dictionarySchema);
