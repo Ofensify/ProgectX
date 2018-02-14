@@ -2,7 +2,7 @@ $(() => {
     let img = $(".carousel-item.active img").attr("src");
     // console.log($(".carousel-item.active img").attr("src"))
     $("#carouselExampleControls").on("slid.bs.carousel", () => {
-        // console.log($(".active img").attr("src"));
+        console.log($(".active img").attr("src"));
         img = $(".active img").attr("src")
     })
     $("#doit").click(() => {
