@@ -71,13 +71,19 @@ router.get('/delete/:id', isLoggedIn, (req,res,next) =>{
 
 router.get('/createnew', isLoggedIn, (req, res, next) => {
   let memes = fs.readdirSync('public/images/memes');
+  // find({ "username": { "$regex": "Alberto", "$options": "i" } })
+
   User.find().exec()
-  res.render('createnew', { user: req.user._id, memes });
+  res.render('createnew', { user: req.user._id, memes,});
 })
 
-router.post('/createnew', isLoggedIn, (req, res, next) => {
+router.post('/createnew', (req, res, next) => {
   // let src = $('.active').children().attr('src');
   // console.log (src)
-  res.redirect('/home')
+  console.log(req.body)
+  User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
+    .then(user=>console.log(user))
+  // res.redirect('/home')
 })
 module.exports = router;
+
