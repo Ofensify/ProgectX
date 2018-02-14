@@ -8,16 +8,14 @@ mongoose
 
   const relations = [
     {
-        destination_Id: "5a82c0e43f2d5609260abe6e",
-        offense_Id: "5a82c0e43f2d5609260abe70",
-        creator_Id: "5a82c0e43f2d5609260abe6d",
-        rating: 0
+        destination_Id: "5a841dc60029020bff65b293",
+        offense_Id: "5a841e428b1af20c54b9ed33",
+        creator_Id: "5a841dc60029020bff65b294"
     },
     {
-        destination_Id: "5a82c0e43f2d5609260abe6d",
-        offense_Id: "5a82c0e43f2d5609260abe71",
-        creator_Id: "5a82c0e43f2d5609260abe6e",
-        rating: 0
+        destination_Id: "5a841dc60029020bff65b293",
+        offense_Id: "5a841e428b1af20c54b9ed34",
+        creator_Id: "5a841dc60029020bff65b294"
     }
   ];
 
@@ -29,4 +27,5 @@ mongoose
     c.forEach(relations => {
       console.log(relations.destination_Id);
     });
+    mongoose.connection.close();
   });

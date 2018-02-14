@@ -2,29 +2,45 @@
 <a href="/createnew">
     <h2>crea tu ofensa </h2>
 </a>
-<a href="/profile/<%= user %>">
+<a href="/profile/<%= user._id %>">
     <h2>tu perfil </h2>
 </a>
 <h2>ofensas en orden de novedad</h2>
 
-    <% off.forEach((o) => {  %>
-        <ul>
+<% objectsArray.forEach((o,i,arr) => {  %>
+    <ul>
         <li>
-            <%= o.destination_Id.username %>
+            <%= o.offense.destination_Id.username %>
         </li>
         <li>
-            <%= o.offense_Id.img %>
+            <%= o.offense.offense_Id.img %>
         </li>
         <li>
-            <%= o.offense_Id.created_at %>
+            <%= o.offense.offense_Id.created_at %>
+        </li>
+        <li>
+            <% if (!(o.isRated)){ %>
+                <form action="/vote/<%=o.offense.offense_Id._id%>" method="POST">
+                <select name="value">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button>Votar</button>
+                </form>
+                <% } else { %>
+                    <a href="/delete/">Elimina tu voto</a>
+                    <%}%>
         </li>
     </ul>
-        <% }) %>
+    <% }) %>
 
-<h2> futuro top de gente que crea ofensas</h2>
+        <h2> futuro top de gente que crea ofensas</h2>
 
-<h2> ofensas mas puntuada</h2>
+        <h2> ofensas mas puntuada</h2>
 
-<a href="/logout" ´>
-    <h2>Logout</h2>
-</a>
+        <a href="/logout" ´>
+            <h2>Logout</h2>
+        </a>

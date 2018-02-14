@@ -30,19 +30,7 @@ const users = [
   }
 ];
 
-const offense = [
-  {
-    description: "ofensa1",
-    img: "img-1"
-  },
-  {
-    description: "ofensa2",
-    img: "img-2"
-  }
-];
-
 User.collection.drop();
-Offense.collection.drop();
 
 User.create(users, (err, c) => {
   if (err) {
@@ -53,12 +41,3 @@ User.create(users, (err, c) => {
   });
 });
 
-Offense.create(offense, (err, o) => {
-  if (err) {
-    throw err;
-  }
-  o.forEach(offense => {
-    console.log(offense.description);
-  });
-  mongoose.connection.close();
-});

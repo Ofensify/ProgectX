@@ -20,4 +20,5 @@ mongoose
     c.forEach(dictionary => {
       console.log(dictionary.combination);
     });
+    mongoose.connection.close();
   });
