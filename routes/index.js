@@ -60,6 +60,15 @@ router.post('/vote/:id', isLoggedIn, (req,res,next) => {
     })
 })
 
+router.get('/delete/:id', isLoggedIn, (req,res,next) =>{
+    let off_id = req.params.id;
+    let user_id = req.user._id;
+    Rating.findOneAndRemove({user_Id:user_id,offense_Id:off_id })
+    .then(()=> {
+      res.redirect("/home");
+    })
+})
+
 router.get('/createnew', isLoggedIn, (req, res, next) => {
   let memes = fs.readdirSync('public/images/memes');
   User.find().exec()
