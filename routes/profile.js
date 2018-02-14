@@ -19,7 +19,7 @@ router.get('/profile/:id', onlyMe, (req, res, next) => {
                 .populate("offense_Id")
                 .then(relationc => {
                     // console.log(relationc);
-                    res.render('profile', { relationc, relationd, user, })
+                    res.render('profile', { relationc, relationd, user, name })
                 })
                 .catch((e) => {
                     next(e);
