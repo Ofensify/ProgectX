@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const offenseSchema = new Schema({
   description: String,
-  img:String,
+  img:String
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

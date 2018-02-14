@@ -6,8 +6,6 @@ const User = require('../models/User');
 const Relation = require('../models/Relation');
 const fs = require('fs');
 
-
-
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index');

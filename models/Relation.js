@@ -7,7 +7,8 @@ const relationSchema = new Schema(
   {
     destination_Id: { type: Schema.Types.ObjectId, ref: "User", required: false },
     offense_Id: { type: Schema.Types.ObjectId, ref: "Offense", required: true },
-    creator_Id: { type: Schema.Types.ObjectId, ref: 'User', required: true}
+    creator_Id: { type: Schema.Types.ObjectId, ref: 'User', required: true},
+    rating: Number
   })
 
 const Relation = mongoose.model("Relation", relationSchema);

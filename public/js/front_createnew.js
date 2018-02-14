@@ -1,8 +1,8 @@
 $(() => {
-    let img = $(".carousel-item.active img").attr("src");
+    let img = ($(".active img").attr("src")).split('/')[3];
     // console.log($(".carousel-item.active img").attr("src"))
     $("#carouselExampleControls").on("slid.bs.carousel", () => {
-        // console.log($(".active img").attr("src"));
+    //    console.log( ($(".active img").attr("src")).split('/')[3]);
         img = $(".active img").attr("src")
     })
     $("#doit").click(() => {
