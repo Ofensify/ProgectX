@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const { dbURL } = require("../config");
+const {dbURL} = require("../config");
 const Dictionary = require("../models/Dictionary");
 mongoose
   .connect(dbURL)
   .then(() => console.log(`Connected to ${dbURL}`))
   .catch(e => console.log(e));
+  console.log(process.env.MONGODB_URI);
 
   const dictionary = [{
     combination:"0001",
@@ -29,7 +30,7 @@ mongoose
     text1: "Que se seca la ballena"
 
   },  {
-    combination:"1000",
+    combination:"1100",
     text0:"La mas tonta de 10 mujeres?",
     text1: "Al azar"
 
@@ -78,7 +79,22 @@ mongoose
     text0:"Eres tan, tan gorda.",
     text1: "Que usas camisetas talla etc..."
 
-  }];
+  },{
+  combination:"0100",
+  text0:"Eres más inútil...",
+  text1: "Que el cenicero de una moto"
+
+},{
+  combination:"0100",
+  text0:"Te apuntaste a un concurso de feos ",
+  text1: "y dijeron que no admitían profesionales"
+
+},{
+  combination:"0010",
+  text0:"Te bautizaron en una plaza de toros",
+  text1: "y con camiones de riego"
+
+}];
 
 
   Dictionary.collection.drop();

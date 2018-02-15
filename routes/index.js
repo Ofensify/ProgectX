@@ -78,12 +78,14 @@ router.get('/createnew', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/createnew', (req, res, next) => {
-  // let src = $('.active').children().attr('src');
-  // console.log (src)
+  let combi = req.body.sexo + '' + req.body.guapo + '' + req.body.complex + '' + req.body.color
+
   console.log(req.body)
   User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
     .then(user=>console.log(user))
-  // res.redirect('/home')
+  res.redirect('/home')
 })
+
+
 module.exports = router;
 
