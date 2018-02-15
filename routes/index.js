@@ -13,8 +13,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'offendify@gmail.com',
-    pass: '0ffendify'
+    user: 'offensify@gmail.com',
+    pass: '0ffensify'
   }
 });
 
@@ -32,10 +32,11 @@ router.get('/', (req, res, next) => {
 
 router.get('/home', isLoggedIn, (req, res, next) => {
   let objectsArray = [];
-  var offPromises
-  Relation.find()
-    .limit(2) //limitar a x mas adelante
-    .populate("destination_Id")
+  var offPromises;
+  var conterPromises;
+  Relation.find({})
+    .sort({ created_at: -1 })
+    .limit(10) //limitar a x mas adelante
     .populate("offense_Id")
     .then(off => {
       offPromises = off.map((o) => {
@@ -51,12 +52,28 @@ router.get('/home', isLoggedIn, (req, res, next) => {
             return object
           })
       })
-      Promise.all(offPromises).then(objectsArray => {
-        // console.log(objectsArray[0])
-        res.render('home', { objectsArray })
-      })
-
+      // DELPINO
+      // User.find({}, { username: 1 }).then(users => {
+      //     counterPromises = users.map(user => {
+      //       return Relation.find({creator_Id: user._id})
+      //   })
+      // })
+      //
+      // ADRIAN
+      // Relation.find({})
+      //     .populate("creator_Id")
+      //     .then((users)=> {console.log(users)})
+      // Promise.all([Promise.all(counterPromises), Promise.all(offPromises)])
+      Promise.all(offPromises)
+      .then(array=>{
+        array.forEach((a)=>{console.log(a)})
+        res.render("home", {array})
+        // console.log(Math.max.apply(null,array[0]))
+        // console.log(array[0])
+        // console.log(array[1])
+      // })
     })
+  })
     .catch((e) => { next(e) })
 })
 
@@ -147,10 +164,6 @@ router.post('/createnew', (req, res, next) => {
       })
     })
 })
-
-// NOTA USAR ESTO PARA BUSQUEDA DE USUARIOS.
-// User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
-// .then(user=>console.log(user))
 
 module.exports = router;
 

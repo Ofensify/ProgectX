@@ -11,8 +11,9 @@
     <div>
         <% if (relationc.length>0) { %>
             <% relationc.forEach((rc)=>{ %>
-                <%= rc %>
+                <img src=<%= rc.offense_Id.img %>></img>
             <a href="/offense/delete/<%=rc._id%>" type="button" class="btn btn-danger">Delete</a>
+            
             <br>
             <%}) %>   
         <%}%>

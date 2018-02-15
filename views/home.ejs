@@ -7,13 +7,10 @@
 </a>
 <h2>ofensas en orden de novedad</h2>
 
-<% objectsArray.forEach((o,i,arr) => {  %>
+<% array.forEach((o,i,arr) => {  %>
     <ul>
         <li>
-            <%= o.offense.destination_Id.username %>
-        </li>
-        <li>
-            <%= o.offense.offense_Id.img %>
+            <img src="<%= o.offense.offense_Id.img %>" width=100px height=100px</img>
         </li>
         <li>
             <%= o.offense.offense_Id.created_at %>
@@ -36,10 +33,6 @@
         </li>
     </ul>
     <% }) %>
-
-        <h2> futuro top de gente que crea ofensas</h2>
-
-        <h2> ofensas mas puntuada</h2>
 
         <a href="/logout" ´>
             <h2>Logout</h2>
