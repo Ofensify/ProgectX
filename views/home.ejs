@@ -1,4 +1,5 @@
-<img class="logo" src="./images/logo-off.png">
+<div class="container">
+    <img class="logo" src="./images/logo-off.png">
 <a href="/createnew">
     <h2>crea tu ofensa </h2>
 </a>
@@ -8,31 +9,32 @@
 <h2>ofensas en orden de novedad</h2>
 
 <% array.forEach((o,i,arr) => {  %>
-    <ul>
-        <li>
-            <img src="<%= o.offense.offense_Id.img %>" width=100px height=100px</img>
-        </li>
-        <li>
-            <%= o.offense.offense_Id.created_at %>
-        </li>
-        <li>
-            <% if (!(o.isRated)){ %>
-                <form action="/vote/<%=o.offense.offense_Id._id%>" method="POST">
-                <select name="value">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <button>Votar</button>
-                </form>
-                <% } else { %>
-                    <a href="/delete/<%=o.offense.offense_Id._id%>">Elimina tu voto</a>
-                    <%}%>
-        </li>
-    </ul>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= o.offense.offense_Id.img %>">
+        <div class="card-body">
+            <p class="card-text">
+                <%= o.offense.offense_Id.created_at %>
+                    <br>
+                    <% if (!(o.isRated)){ %>
+                        <form action="/vote/<%=o.offense.offense_Id._id%>" method="POST">
+                            <select name="value">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <button>Votar</button>
+                        </form>
+                        <% } else { %>
+                            <a href="/delete/<%=o.offense.offense_Id._id%>">Elimina tu voto</a>
+                            <%}%>
+            </p>
+        </div>
+    </div>
+
     <% }) %>
         <a href="/logout" ´>
             <h2>Logout</h2>
         </a>
+    </div>
