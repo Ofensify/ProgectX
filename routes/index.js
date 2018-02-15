@@ -75,43 +75,43 @@ router.get('/createnew', isLoggedIn, (req, res, next) => {
   let memes = fs.readdirSync('public/images/memes');
   // find({ "username": { "$regex": "Alberto", "$options": "i" } })
   User.find().exec()
-  res.render('createnew', { user: req.user._id, memes, });
+  res.render('createnew', { user: req.user._id, memes,name:req.user.username });
 })
 
 router.post('/createnew', (req, res, next) => {
-  let combi = req.body.sexo + '' + req.body.guapo + '' + req.body.complex + '' + req.body.color
-  let dest = req.body.name
-  // console.log(req.body)
-  Dictionary.find({ combination: combi })
-    .then((offensive) => {
-      let off = (Math.floor(Math.random(offensive.length)));
-      let text0 = offensive[off].text0;
-      let text1 = offensive[off].text1;
-      let template_id = req.body.img;
-      let username = 'imgflip_hubot'
-      let password = 'imgflip_hubot'
-      let request = require('request');
-      let headers = {
-        'User-Agent': 'Super Agent/0.0.1',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-      let options = {
-        url: 'https://api.imgflip.com/caption_image',
-        method: 'POST',
-        headers: headers,
-        form: { 'template_id': template_id, 'username': username, "password": password, "text0": text0, "text1": text1 },
-      }
-      request(options, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-          // Print out the response body
-          let img_off = (JSON.parse(body).data.url)
-          const newOffense = new Offense({
-            img: img_off
-          })
-          newOffense.save()
-                    .then(off_saved=>{
-                          let offsaved_id = off_saved._id
-                          let creat_id = req.user._id})
+  let combi = [req.body.sexo,req.body.character,req.body.complex,req.body.color]
+  let dest = req.body.name;
+  Dictionary.find({'combination':{$all:combi}})
+    .then(offenseArray=>console.log(offenseArray))
+
+      // let off = (Math.floor(Math.random(offensive.length)));
+      // let text0 = offensive[off].text0;
+      // let text1 = offensive[off].text1;
+      // let template_id = req.body.img;
+      // let username = 'imgflip_hubot'
+      // let password = 'imgflip_hubot'
+      // let request = require('request');
+      // let headers = {
+      //   'User-Agent': 'Super Agent/0.0.1',
+      //   'Content-Type': 'application/x-www-form-urlencoded'
+      // }
+      // let options = {
+      //   url: 'https://api.imgflip.com/caption_image',
+      //   method: 'POST',
+      //   headers: headers,
+      //   form: { 'template_id': template_id, 'username': username, "password": password, "text0": text0, "text1": text1 },
+      // }
+      // request(options, (error, response, body) => {
+      //   if (!error && response.statusCode == 200) {
+      //     // Print out the response body
+      //     let img_off = (JSON.parse(body).data.url)
+      //     const newOffense = new Offense({
+      //       img: img_off
+      //     })
+      //     newOffense.save()
+      //               .then(off_saved=>{
+      //                     let offsaved_id = off_saved._id
+      //                     let creat_id = req.user._id})
           //   if (err) {
           //     console.log("err")
           //   } else {
@@ -129,14 +129,14 @@ router.post('/createnew', (req, res, next) => {
           //     })
           //   }
           // })
-        }
-      })
+        // }
+      // })
       // NOTA USAR ESTO PARA BUSQUEDA DE USUARIOS.
       // User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
       // .then(user=>console.log(user))
       res.redirect('/home')
     })
-})
+// })
 
 module.exports = router;
 

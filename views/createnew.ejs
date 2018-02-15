@@ -1,43 +1,50 @@
-<h1>logo</h1>
-<h2>info del perfil del usuario:
-    <%= user %>
-</h2>
-<h2>carrousel de imagenes para seleccionar el fondo del insulto</h2>
+<div class="container">
+<img class="logo" src="./images/logo-off.png">
+<h2>Bienvenido moderfucker <%= name %>, eres un autentico hijo de puta </h2>
+</div>
 <form action="/createnew" method="POST">
     <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel">
-        <h2>Tipo de insulto??</h2>
+        <div class="select"><h2>Selecciona una imagen</h2></div>
         <div class="carousel-inner">
             <input name="img" id="actualImg" hidden value="a">
         </div>
-        <select id="Sexo" name="sexo">
-            <option value="0">Hombre</option>
-            <option value="1">Mujer</option>
-            <option value="2" selected>Indiferente</option>
+        <div class="select-contain">
+        <select class="selcls" id="Sexo" name="sexo"> 
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+            <option value="sexo" selected>Indiferente</option>
             
         </select>
-        <select id="Guapo" name="guapo">
-            <option value="0">Feo</option>
-            <option value="1">Tonto</option>
-            <option value="2" selected>Indiferente</option>
+        <select class="selcls" id="Guapo" name="character">
+            <option value="feo">Feo</option>
+            <option value="tonto">Tonto</option>
+            <option value="character" selected>Indiferente</option>
             
         </select>
-        <select id="Complex" name="complex">
-            <option value="0">Gordo</option>
-            <option value="1">Flaco</option>
-            <option value="2" selected>Indiferente</option>
+        <select class="selcls" id="Complex" name="complex">
+            <option value="gordo">Gordo</option>
+            <option value="flaco">Flaco</option>
+            <option value="complex" selected>Indiferente</option>
             
         </select>
-        <select id="Color" name="color">
-            <option value="0">Blanco</option>
-            <option value="1">Negro</option>
-            <option value="2" selected>Indiferente</option>
+        <select class="selcls" id="Color" name="color">
+            <option value="blanco">Blanco</option>
+            <option value="negro">Negro</option>
+            <option value="color" selected>Indiferente</option>
             
         </select>
-        <h2>Destinatario</h2>
-        <input  id ="namet"type="text" name="name">
+    </div>
+     <div class="container-correo">
+        <h2>Objetivo de tu Ira(correo)</h2>
+        <input  id ="namet" type="text" name="name" >
         <button>Submit</button>
+        </div>
+    </div>
     </form>
     <br>
-<a href="/home">
-    <h2>go home</h2>
-</a>
+    <div class="btn-home">
+    <button type="button" class="btn btn-primary btn-sm"><a href="/home" style='text-decoration:none;color:white;'>
+        <h2>HOME</h2>
+    </a></button>
+</div>
+
