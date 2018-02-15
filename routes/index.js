@@ -5,7 +5,6 @@ const onlyMe = require('../middlewares/onlyMe');
 const User = require('../models/User');
 const Relation = require('../models/Relation');
 const Rating = require('../models/Rating');
-const fs = require('fs');
 const Dictionary = require("../models/Dictionary");
 const Offense = require('../models/Offense');
 const nodemailer = require('nodemailer');
@@ -36,7 +35,7 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   var conterPromises;
   Relation.find({})
     .sort({ created_at: -1 })
-    .limit(10) //limitar a x mas adelante
+    .limit(5) //limitar a x mas adelante
     .populate("offense_Id")
     .then(off => {
       offPromises = off.map((o) => {
@@ -52,6 +51,10 @@ router.get('/home', isLoggedIn, (req, res, next) => {
             return object
           })
       })
+      Promise.all(offPromises)
+      .then(array=>{
+        array.forEach((a)=>{console.log(a)})
+        res.render("home", {array})
       // DELPINO
       // User.find({}, { username: 1 }).then(users => {
       //     counterPromises = users.map(user => {
@@ -64,10 +67,7 @@ router.get('/home', isLoggedIn, (req, res, next) => {
       //     .populate("creator_Id")
       //     .then((users)=> {console.log(users)})
       // Promise.all([Promise.all(counterPromises), Promise.all(offPromises)])
-      Promise.all(offPromises)
-      .then(array=>{
-        array.forEach((a)=>{console.log(a)})
-        res.render("home", {array})
+    
         // console.log(Math.max.apply(null,array[0]))
         // console.log(array[0])
         // console.log(array[1])
@@ -76,6 +76,51 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   })
     .catch((e) => { next(e) })
 })
+
+// Promise.all(offPromises)
+// .then(array=>{
+//   array.forEach((a)=>{console.log(a)})
+//   res.render("home", {array})
+
+// console.log(Math.max.apply(null,array[0]))
+// console.log(array[0])
+// console.log(array[1])
+// })      
+// })
+
+// Relation.find({}, 'creator_Id')
+// .then(result => {
+//   console.log(result)
+//   checkUser(result);
+// })
+// .catch(err => console.log(err));
+
+// let storedResults = {};
+
+// const checkUser = (result) => {
+//   result.forEach(user => {
+//     checkStorage(user.creator_Id)
+//   })
+// }
+
+// const checkStorage = (id) => {
+//   if(storedResults[id]) {
+//     storedResults[id] = storedResults[id] + 1;
+//   }
+//   storedResults[id] = 1;
+// }
+
+// let sortable = [];
+
+// for (let id in storedResults) {
+//     sortable.push([id, storedResults[id]]);
+// }
+
+// sortable.sort(function(a, b) {
+//     return a[1] - b[1];
+// });
+
+// console.log(sortable);
 
 router.post('/vote/:id', isLoggedIn, (req, res, next) => {
   let off_id = req.params.id;
@@ -105,10 +150,9 @@ router.get('/delete/:id', isLoggedIn, (req, res, next) => {
 })
 
 router.get('/createnew', isLoggedIn, (req, res, next) => {
-  let memes = fs.readdirSync('public/images/memes');
   // find({ "username": { "$regex": "Alberto", "$options": "i" } })
   User.find().exec()
-  res.render('createnew', { user: req.user._id, memes,name:req.user.username });
+  res.render('createnew', { user: req.user._id, name: req.user.username });
 })
 
 router.post('/createnew', (req, res, next) => {
@@ -163,7 +207,7 @@ router.post('/createnew', (req, res, next) => {
         }
       })
     })
-// })
+})
 
 module.exports = router;
 
