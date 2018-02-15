@@ -5,7 +5,6 @@ const onlyMe = require('../middlewares/onlyMe');
 const User = require('../models/User');
 const Relation = require('../models/Relation');
 const Rating = require('../models/Rating');
-const fs = require('fs');
 const Dictionary = require("../models/Dictionary");
 const Offense = require('../models/Offense');
 const nodemailer = require('nodemailer');
@@ -105,10 +104,9 @@ router.get('/delete/:id', isLoggedIn, (req, res, next) => {
 })
 
 router.get('/createnew', isLoggedIn, (req, res, next) => {
-  let memes = fs.readdirSync('public/images/memes');
-  // find({ "username": { "$regex": "Alberto", "$options": "i" } })
+   // find({ "username": { "$regex": "Alberto", "$options": "i" } })
   User.find().exec()
-  res.render('createnew', { user: req.user._id, memes,name:req.user.username });
+  res.render('createnew', { user: req.user._id,name:req.user.username });
 })
 
 router.post('/createnew', (req, res, next) => {
