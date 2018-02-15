@@ -32,15 +32,14 @@ router.get("/offense/delete/:id", isLoggedIn, (req, res, next) => {
     Relation.findById(off)
         .populate("offense_Id")
         .then(c => {
-            console.log(c.offense_Id._id)
             Offense.remove({ _id: c.offense_Id._id })
-                .then(() => {
-                    Relation.findByIdAndRemove(off)
-                        .then(() => {
-                            res.redirect('profile')
-                        })
-                })
+        .then(() => {
+            Relation.findByIdAndRemove(off)
+            .then(() => {
+                res.redirect(`/profile/${req.user._id}`)
+            })
         })
+    })
         .catch((e) => {
             next(e);
         })
