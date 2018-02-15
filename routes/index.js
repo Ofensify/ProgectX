@@ -108,7 +108,7 @@ router.get('/createnew', isLoggedIn, (req, res, next) => {
   let memes = fs.readdirSync('public/images/memes');
   // find({ "username": { "$regex": "Alberto", "$options": "i" } })
   User.find().exec()
-  res.render('createnew', { user: req.user._id, memes, });
+  res.render('createnew', { user: req.user._id, memes,name:req.user.username });
 })
 
 router.post('/createnew', (req, res, next) => {
@@ -163,7 +163,7 @@ router.post('/createnew', (req, res, next) => {
         }
       })
     })
-})
+// })
 
 module.exports = router;
 
