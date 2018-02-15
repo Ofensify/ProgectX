@@ -1,18 +1,28 @@
-<div>
-        <img src="../images/logo-off-horizontal.png">
-</div>
-<a href="/home">Go home</a>
-<h2>User_Id: <%= user %></h2>
-<h2>User_name: <%= name %></h2>
-<div>
-    <h3>creados por mi</h3>
-    <div>
-        <% if (relationc.length>0) { %>
-            <% relationc.forEach((rc)=>{ %>
-                <img src=<%= rc.offense_Id.img %>></img>
-            <a href="/offense/delete/<%=rc._id%>" type="button" class="btn btn-danger">Delete</a>
-            <br>
-            <%}) %>   
-        <%}%>
-    </div>
-</div>
+<div class="container-first">
+    <img class="logo" src="../images/logo-off.png">
+    <a href="/home">Go home</a>
+    <h2>Este es tu historial de ofensas:
+        <%= name %>
+    </h2>
+
+    <div class="container">
+        <div class="row">
+            <% if (relationc.length>0) { %>
+                <% relationc.forEach((rc)=>{ %>
+
+
+                    <div class="col-3">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" height="300" width="150" src="<%= rc.offense_Id.img %>">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="/offense/delete/<%=rc._id%>" type="button" class="btn btn-danger">Delete</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                                    <%}) %>
+                                        <%}%>
+                            </div>
+                        </div>
+                    </div>

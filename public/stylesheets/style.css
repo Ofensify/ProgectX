@@ -38,18 +38,20 @@ h4,
 }
 .container-landing{
   text-align: center;
+
 }
 #username_sign{
   width: 350px;
-  margin-left: 500px;
+  margin-left: 550px;
+  
   }
   #password_sign{
     width: 350px;
-    margin-left: 500px;
+    margin-left: 550px;
   }
   #email_sign{
     width: 350px;
-    margin-left: 500px;
+    margin-left: 550px;
 
   }
   .background{
