@@ -114,7 +114,9 @@ h4,
   background-color:white;
     border-color: black;
     color: black
-
 }
-
+.col-margin {
+  padding: 0 1%;
+  margin: 0 1%;
+}
  

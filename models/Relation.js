@@ -8,6 +8,8 @@ const relationSchema = new Schema(
     destination_Id: { type: Schema.Types.ObjectId, ref: "User", required: false },
     offense_Id: { type: Schema.Types.ObjectId, ref: "Offense", required: true },
     creator_Id: { type: Schema.Types.ObjectId, ref: 'User', required: true}
+  }, {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
   })
 
 const Relation = mongoose.model("Relation", relationSchema);

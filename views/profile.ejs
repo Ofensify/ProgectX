@@ -2,10 +2,8 @@
         <img src="../images/logo-off-horizontal.png">
 </div>
 <a href="/home">Go home</a>
-<h2>User_Id: <%= user %>
-<h2>User_name: <%= name %>
-
-</h2>
+<h2>User_Id: <%= user %></h2>
+<h2>User_name: <%= name %></h2>
 <div>
     <h3>creados por mi</h3>
     <div>
@@ -13,15 +11,8 @@
             <% relationc.forEach((rc)=>{ %>
                 <img src=<%= rc.offense_Id.img %>></img>
             <a href="/offense/delete/<%=rc._id%>" type="button" class="btn btn-danger">Delete</a>
-            
             <br>
             <%}) %>   
         <%}%>
-    </div>
-</div>
-<div>
-    <h3>destinatario yo</h3>
-    <div>
-        <%= relationd %>
     </div>
 </div>

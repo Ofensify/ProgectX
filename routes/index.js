@@ -35,9 +35,10 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   var conterPromises;
   Relation.find({})
     .sort({ created_at: -1 })
-    .limit(5) //limitar a x mas adelante
+    .limit(4) //limitar a x mas adelante
     .populate("offense_Id")
     .then(off => {
+      console.log(off)
       offPromises = off.map((o) => {
         let object = {
           offense: o,
@@ -52,28 +53,28 @@ router.get('/home', isLoggedIn, (req, res, next) => {
           })
       })
       Promise.all(offPromises)
-      .then(array=>{
-        array.forEach((a)=>{console.log(a)})
-        res.render("home", {array})
-      // DELPINO
-      // User.find({}, { username: 1 }).then(users => {
-      //     counterPromises = users.map(user => {
-      //       return Relation.find({creator_Id: user._id})
-      //   })
-      // })
-      //
-      // ADRIAN
-      // Relation.find({})
-      //     .populate("creator_Id")
-      //     .then((users)=> {console.log(users)})
-      // Promise.all([Promise.all(counterPromises), Promise.all(offPromises)])
-    
-        // console.log(Math.max.apply(null,array[0]))
-        // console.log(array[0])
-        // console.log(array[1])
-      // })
+        .then(array => {
+          array.forEach((a) => { console.log(a) })
+          res.render("home", { array })
+          // DELPINO
+          // User.find({}, { username: 1 }).then(users => {
+          //     counterPromises = users.map(user => {
+          //       return Relation.find({creator_Id: user._id})
+          //   })
+          // })
+          //
+          // ADRIAN
+          // Relation.find({})
+          //     .populate("creator_Id")
+          //     .then((users)=> {console.log(users)})
+          // Promise.all([Promise.all(counterPromises), Promise.all(offPromises)])
+
+          // console.log(Math.max.apply(null,array[0]))
+          // console.log(array[0])
+          // console.log(array[1])
+          // })
+        })
     })
-  })
     .catch((e) => { next(e) })
 })
 
