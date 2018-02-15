@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
 const dictionarySchema = new Schema({
-      combination: String,
+      combination: [String],
       text0: String,
       text1: String
 });

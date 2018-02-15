@@ -11,6 +11,7 @@ const debug = require('debug')(`m2-0118-passport-auth:${path.basename(__filename
 const passportConfig = require('./passport')
 const expressLayouts = require('express-ejs-layouts');
 const {dbURL} = require('./config');
+const nodemailer = require('nodemailer')
 
 mongoose.connect(dbURL)
         .then(() => debug(`Connected to ${dbURL}`))

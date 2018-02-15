@@ -7,7 +7,23 @@ const Relation = require('../models/Relation');
 const Rating = require('../models/Rating');
 const fs = require('fs');
 const Dictionary = require("../models/Dictionary");
-const Offense = require('../models/Offense')
+const Offense = require('../models/Offense');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'offendify@gmail.com',
+    pass: '0ffendify'
+  }
+});
+
+let mailOptions = {
+  from: 'offendify@gmail.com',
+  to: '',
+  subject: 'Someone wanna hurt you...',
+  html: ''
+};
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -79,10 +95,9 @@ router.get('/createnew', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/createnew', (req, res, next) => {
-  let combi = req.body.sexo + '' + req.body.guapo + '' + req.body.complex + '' + req.body.color
-  let dest = req.body.name
-  // console.log(req.body)
-  Dictionary.find({ combination: combi })
+  let combi = [req.body.sexo, req.body.character, req.body.complex, req.body.color]
+  mailOptions.to = req.body.name;
+  Dictionary.find({ 'combination': { $all: combi } })
     .then((offensive) => {
       let off = (Math.floor(Math.random(offensive.length)));
       let text0 = offensive[off].text0;
@@ -105,38 +120,37 @@ router.post('/createnew', (req, res, next) => {
         if (!error && response.statusCode == 200) {
           // Print out the response body
           let img_off = (JSON.parse(body).data.url)
-          const newOffense = new Offense({
+          mailOptions.html = (`<img src="${img_off}"></img>`)
+          let newOffense = new Offense({
             img: img_off
           })
           newOffense.save()
-                    .then(off_saved=>{
-                          let offsaved_id = off_saved._id
-                          let creat_id = req.user._id})
-          //   if (err) {
-          //     console.log("err")
-          //   } else {
-          //     const newRelation = new Relation({
-          //       offense_Id: offsaved_id,
-          //       creator_Id: creat_id,
-          //       destination_Id: dest
-          //     })
-          //     newRelation.save((err) => {
-          //       if (err) {
-          //         console.log("err1")
-          //       } else {
-          //         console.log("noerr1")
-          //       }
-          //     })
-          //   }
-          // })
+            .then(off_saved => {
+              // let offsaved_id = off_saved._id
+              let newRelation = new Relation({
+                offense_Id: off_saved._id,
+                creator_Id: req.user._id,
+              })
+              newRelation.save()
+                .then(() => {
+                  transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                    res.redirect('/home')
+                  })
+                })
+            })
         }
       })
-      // NOTA USAR ESTO PARA BUSQUEDA DE USUARIOS.
-      // User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
-      // .then(user=>console.log(user))
-      res.redirect('/home')
     })
 })
+
+// NOTA USAR ESTO PARA BUSQUEDA DE USUARIOS.
+// User.find({ username: { $regex: new RegExp(req.body.name) }},{ username:1,_id:0})
+// .then(user=>console.log(user))
 
 module.exports = router;
 

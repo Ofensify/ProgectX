@@ -10,8 +10,11 @@
     <h3>creados por mi</h3>
     <div>
         <% if (relationc.length>0) { %>
-            <%= relationc %>
-            <button href="delete/<%=relationc[0]._id%>" type="button" class="btn btn-danger">Delete</a>
+            <% relationc.forEach((rc)=>{ %>
+                <%= rc %>
+            <a href="/offense/delete/<%=rc._id%>" type="button" class="btn btn-danger">Delete</a>
+            <br>
+            <%}) %>   
         <%}%>
     </div>
 </div>

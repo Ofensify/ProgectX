@@ -27,7 +27,7 @@ router.get('/profile/:id', onlyMe, (req, res, next) => {
         });
 })
 
-router.get("/delete/:id", isLoggedIn, (req, res, next) => {
+router.get("/offense/delete/:id", isLoggedIn, (req, res, next) => {
     let off = req.params.id;
     Relation.findById(off)
         .populate("offense_Id")
@@ -37,7 +37,7 @@ router.get("/delete/:id", isLoggedIn, (req, res, next) => {
                 .then(() => {
                     Relation.findByIdAndRemove(off)
                         .then(() => {
-                            res.redirect('/profile')
+                            res.redirect('profile')
                         })
                 })
         })
