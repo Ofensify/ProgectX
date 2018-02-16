@@ -96,6 +96,7 @@ router.post('/createnew', (req, res, next) => {
   mailOptions.to = req.body.name;
   Dictionary.find({ 'combination': { $all: combi } })
     .then((offensive) => {
+      console.log(offensive)
       let off = (Math.floor(Math.random(offensive.length)));
       let text0 = offensive[off].text0;
       let text1 = offensive[off].text1;
@@ -117,7 +118,7 @@ router.post('/createnew', (req, res, next) => {
         if (!error && response.statusCode == 200) {
           // Print out the response body
           let img_off = (JSON.parse(body).data.url)
-          mailOptions.html = (`<img src="${img_off}"></img>`)
+          mailOptions.html = (`<img src="${img_off}"></img><a href=https://offensify.herokuapp.com>Just Offensify</a>`)
           let newOffense = new Offense({
             img: img_off
           })
