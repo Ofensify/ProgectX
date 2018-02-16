@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const Dictionary = require("../models/Dictionary");
 const {dbURL} = require('../config');
+
 mongoose.connect(dbURL)
         .then(() => debug(`Connected to ${dbURL}`))
         .catch(e => console.log(e))
+
 const dictionary = [{
-  // combination: "2221",
   combination: ["sexo","character","complex","negro"],
   text0: "¿Cómo se sacan las fotos los negros?",
   text1: "En negativo"

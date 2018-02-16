@@ -96,7 +96,6 @@ router.post('/createnew', (req, res, next) => {
   mailOptions.to = req.body.name;
   Dictionary.find({ 'combination': { $all: combi } })
     .then((offensive) => {
-      console.log(offensive)
       let off = (Math.floor(Math.random(offensive.length)));
       let text0 = offensive[off].text0;
       let text1 = offensive[off].text1;
