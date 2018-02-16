@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Dictionary = require("../models/Dictionary");
-// const {dbURL} = require('../config');
-// console.log({dbURL});
-mongoose.connect('mongodb://Alberto_soler:1234@ds133558.mlab.com:33558/offensify')
-        .then(() => debug(`Connected to ${dbURL}`))
-        .catch(e => console.log(e))
+const {dbURL} = require('../config');
+
+mongoose
+    .connect(dbURL)
+    .then(() => console.log(`Connected to ${dbURL}`))
+    .catch(e => console.log(e));
 const dictionary = [{
-  // combination: "2221",
   combination: ["sexo","character","complex","negro"],
   text0: "¿Cómo se sacan las fotos los negros?",
   text1: "En negativo"
