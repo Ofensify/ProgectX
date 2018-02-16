@@ -29,8 +29,6 @@ app.set('view engine', 'ejs');
 app.set('layout', 'layouts/main-layout');
 app.use(expressLayouts);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -56,7 +54,6 @@ app.use((req,res,next) => {
 app.use('/', index);
 app.use('/', profile);
 app.use('/', auth);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
