@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Dictionary = require("../models/Dictionary");
-// const {dbURL} = require('../config');
-// console.log({dbURL});
-mongoose.connect('mongodb://Alberto_soler:1234@ds133558.mlab.com:33558/offensify')
+const {dbURL} = require('../config');
+mongoose.connect(dbURL)
         .then(() => debug(`Connected to ${dbURL}`))
         .catch(e => console.log(e))
 const dictionary = [{
